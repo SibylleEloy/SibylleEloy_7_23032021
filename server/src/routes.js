@@ -1,13 +1,13 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
-const Validate = require('./controllers/Validate')
 const ArticlesController = require('./controllers/ArticlesController')
 const BookmarksController = require('./controllers/BookmarksController')
 const HistoriesController = require('./controllers/HistoriesController')
 
 // authentification des routes sensibles
 const isAuthenticated = require('./policies/isAuthenticated')
-
+// autorisation des routes sensibles
+const isAdmin = require('./policies/isAdmin')
 // déclaration des routes qui pointent vers le controller / endpoints
 // appel de la policy comme middleware function avant le controller
 
@@ -25,19 +25,17 @@ module.exports = (app) => {
   app.get('/articles',
     ArticlesController.index)
   app.get('/articles/:articleId',
-    isAuthenticated,
+    isAdmin,
     ArticlesController.show)
   // appelle le contrôleur article avec la méthode put
   app.put('/articles/:articleId',
     isAuthenticated,
-    Validate.grantAccess('updateAny', 'article'),
     ArticlesController.put)
   app.post('/articles',
     isAuthenticated,
     ArticlesController.post)
   app.delete('/articles/:articleId',
     isAuthenticated,
-    Validate.grantAccess('deleteAny', 'article'),
     ArticlesController.remove)
 
   // pour bookmarks et histories, on utilise un endpoint authentification : le user doit être connecté, il doit y avoir ce jwt token qui doit être valide et connecté au bon utilisateur

@@ -61,7 +61,8 @@ export default {
     lastname: '',
     email: '',
     password: '',
-    error: null
+    error: null,
+    role: null
   }),
 
   computed: {
@@ -71,7 +72,7 @@ export default {
         lastname: this.lastname,
         email: this.email,
         password: this.password,
-        role: this.role
+        role: this.roles
       }
     }
   },
@@ -80,7 +81,10 @@ export default {
       try {
         const response = await AuthenticationService.register({
           email: this.email,
-          password: this.password
+          password: this.password,
+          firstname: this.firstname,
+          lastname: this.lastname,
+          role: this.role
         })
         this.$store.dispatch('setToken', response.data.token)
         this.$store.dispatch('setUser', response.data.user)
