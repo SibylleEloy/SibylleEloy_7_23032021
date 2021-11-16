@@ -1,5 +1,5 @@
 <template>
-  <panel title="Texte">
+  <panel title="Extrait">
     <textarea
       readonly
       v-model="article.texte"
@@ -23,7 +23,7 @@ textarea {
   width: 100%;
   font-family: monospace;
   border: none;
-  height: 600px;
+  height: 100%;
   border-style: none;
   border-color: transparent;
   overflow: auto;

@@ -4,10 +4,9 @@
       <v-layout>
         <v-flex xs6 v-if="isUserLoggedIn">
           <articles-bookmarks />
-          </v-flex>
-          <v-flex xs6 v-if="isUserLoggedIn">
+        </v-flex>
+        <v-flex xs6 v-if="isUserLoggedIn">
           <recently-viewed-articles class="ml-2" />
-          </v-flex>
         </v-flex>
       </v-layout>
 

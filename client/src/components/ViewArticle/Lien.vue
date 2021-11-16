@@ -1,5 +1,5 @@
 <template>
-  <panel title="Lien">
+  <panel title="En savoir plus">
    <a v-bind:href="article.lien">
    VISIT WEBSITE
 </a>

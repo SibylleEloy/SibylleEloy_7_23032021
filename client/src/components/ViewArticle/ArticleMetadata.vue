@@ -31,7 +31,7 @@
           dark
           class="black"
           @click="setAsBookmark">
-          Créer un Bookmark
+          Créér un favori
         </v-btn>
 
         <v-btn
@@ -39,7 +39,7 @@
           dark
           class="black"
           @click="unsetAsBookmark">
-          Supprimer le Bookmark
+          Supprimer le favori
         </v-btn>
 
         <v-btn
