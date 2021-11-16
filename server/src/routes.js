@@ -29,12 +29,15 @@ module.exports = (app) => {
     ArticlesController.show)
   // appelle le contrôleur article avec la méthode put
   app.put('/articles/:articleId',
+    isAdmin,
     isAuthenticated,
     ArticlesController.put)
   app.post('/articles',
+    isAdmin,
     isAuthenticated,
     ArticlesController.post)
   app.delete('/articles/:articleId',
+    isAdmin,
     isAuthenticated,
     ArticlesController.remove)
 

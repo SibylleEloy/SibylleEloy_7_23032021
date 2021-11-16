@@ -1,18 +1,25 @@
 <template>
-  <v-layout>
-    <v-flex xs6 v-if="isUserLoggedIn">
-      <articles-bookmarks />
-      <recently-viewed-articles class="mt-2" />
-    </v-flex>
+  <v-container>
+    <v-layout wrap>
+      <v-layout>
+        <v-flex xs6 v-if="isUserLoggedIn">
+          <articles-bookmarks />
+          </v-flex>
+          <v-flex xs6 v-if="isUserLoggedIn">
+          <recently-viewed-articles class="ml-2" />
+          </v-flex>
+        </v-flex>
+      </v-layout>
 
-    <v-flex :class="{
-        xs12: !isUserLoggedIn,
-        xs6: isUserLoggedIn
-      }" class="ml-2">
-      <articles-search-panel />
-      <articles-panel class="mt-2" />
-    </v-flex>
-  </v-layout>
+      <v-flex :class="{
+          xs12: !isUserLoggedIn,
+          xs12: isUserLoggedIn
+        }" class="mt-2">
+        <articles-search-panel />
+        <articles-panel class="mt-2" />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>

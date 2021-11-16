@@ -1,145 +1,136 @@
 <template>
-      <v-container align="center" justify="center" fill-height>
-        <v-row class="bg-img" justify="space-around">
-          <v-col cols="12" class="mt-8">
-            <v-card width="400">
-              <v-img
-                  height="200px"
-                  src="https://cdn.pixabay.com/photo/2021/07/09/06/52/lavender-6398415_960_720.jpg"
-              >
-                <v-app-bar
-                    class="mt-8"
-                    flat
-                    color="rgba(0, 0, 0, 0)"
-                >
-                  <v-avatar size="100">
-                    <img
-                        alt="user"
-                        src="https://cdn.pixabay.com/photo/2019/12/16/21/39/tree-4700352_960_720.jpg"
-                    >
-                  </v-avatar>
-
-                  <v-spacer></v-spacer>
-
-                  <v-menu offset-y left>
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn
-                          v-bind="attrs"
-                          v-on="on"
-                          color="white"
-                          icon
-                      >
-                        <v-icon>mdi-dots-vertical</v-icon>
-                      </v-btn>
-                    </template>
-                    <v-list>
-                      <v-list-item href="https://edu.fedorae.com">
-                        <v-list-item-title>Edit</v-list-item-title>
-                      </v-list-item>
-                    </v-list>
-                  </v-menu>
-
-                </v-app-bar>
-
-                <v-card-title class="white--text mt-8">
-                  <p class="ml-3">
-                    Jane Doe
-                  </p>
-                </v-card-title>
-              </v-img>
-
-              <v-card-text>
-
-                <div class="font-weight-bold ml-8 mb-2">
-                  Details
-                </div>
-
-                <v-list two-line>
-                  <v-list-item href="https://edu.fedorae.com">
-                    <v-list-item-icon>
-                      <v-icon color="indigo">
-                        mdi-phone
-                      </v-icon>
-                    </v-list-item-icon>
-
-                    <v-list-item-content>
-                      <v-list-item-title>1 444 555 8888</v-list-item-title>
-                      <v-list-item-subtitle>Mobile</v-list-item-subtitle>
-                    </v-list-item-content>
-
-                    <v-list-item-icon>
-                      <v-icon>mdi-message-text</v-icon>
-                    </v-list-item-icon>
-                  </v-list-item>
-
-                  <v-divider inset></v-divider>
-
-                  <v-list-item href="https://edu.fedorae.com">
-                    <v-list-item-icon>
-                      <v-icon color="indigo">
-                        mdi-email
-                      </v-icon>
-                    </v-list-item-icon>
-
-                    <v-list-item-content>
-                      <v-list-item-title>jane@edu.fedorae.com</v-list-item-title>
-                      <v-list-item-subtitle>Work</v-list-item-subtitle>
-                    </v-list-item-content>
-
-                    <v-list-item-icon>
-                      <v-icon>mdi-message-text</v-icon>
-                    </v-list-item-icon>
-                  </v-list-item>
-
-                  <v-divider inset></v-divider>
-
-                  <v-list-item href="https://edu.fedorae.com">
-                    <v-list-item-icon>
-                      <v-icon color="indigo">
-                        mdi-map-marker
-                      </v-icon>
-                    </v-list-item-icon>
-
-                    <v-list-item-content>
-                      <v-list-item-title>Fedorae Education</v-list-item-title>
-                      <v-list-item-subtitle>Online</v-list-item-subtitle>
-                    </v-list-item-content>
-                  </v-list-item>
-                </v-list>
-              </v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-     
-  <v-layout column>
-    <v-flex xs6 offset-xs3>
-      <panel title="Votre profil">
-        <v-layout>
-          <v-flex xs6>
-            <div class="user-firstname">
-              {{user.firstname}}
-            </div>
-            <div class="user-lastname">
-              {{user.lastname}}
-            </div>
-            <div class="user-email">
-              {{user.email}}
-            </div>
-          </v-flex>
-        </v-layout>
-      </panel>
-    </v-flex>
-  </v-layout>
-   </v-container>
+  <div>
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <panel title="Votre profil">
+          <v-layout>
+            <!-- <v-flex xs6>
+              <div class="user-firstname text-xs-left">
+                Nom: {{user.firstname}}
+              </div>
+              <div class="user-lastname text-xs-left">
+                Prénom: {{user.lastname}}
+              </div>
+              <div class="user-email text-xs-left">
+                Email: {{user.email}}
+              </div>
+            </v-flex> -->
+          </v-layout>
+        </panel>
+      </v-flex>
+    </v-layout>
+  <v-layout row>
+      <v-flex xs12 sm6 offset-sm3>
+        <v-card>
+          <!-- <v-img
+            src="../assets/Groupomania_Logos/icon-left-font-monochrome-white.png"
+            height="300px"
+          >
+            <v-layout
+              column
+              fill-height
+            >
+              <v-card-title>
+                <v-btn dark icon>
+                  <v-icon>chevron_left</v-icon>
+                </v-btn>
+  
+                <v-spacer></v-spacer>
+  
+                <v-btn dark icon class="mr-3">
+                  <v-icon>edit</v-icon>
+                </v-btn>
+  
+                <v-btn dark icon>
+                  <v-icon>more_vert</v-icon>
+                </v-btn>
+              </v-card-title>
+  
+              <v-spacer></v-spacer>
+  
+              <v-card-title class="white--text pl-5 pt-5">
+                <div class="display-1 pl-5 pt-5">Ali Conners</div>
+              </v-card-title>
+            </v-layout>
+          </v-img> -->
+  
+          <v-list two-line>
+            <v-list-tile @click="">
+              <v-list-tile-action>
+                <v-icon color="indigo">badge</v-icon>
+              </v-list-tile-action>
+  
+              <v-list-tile-content>
+                <v-list-tile-title>{{user.firstname}}</v-list-tile-title>
+                <v-list-tile-sub-title>Firstname</v-list-tile-sub-title>
+              </v-list-tile-content>
+  
+              <v-list-tile-action>
+                <v-icon>chat</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+  
+            <v-list-tile @click="">
+              <v-list-tile-action></v-list-tile-action>
+  
+              <v-list-tile-content>
+                <v-list-tile-title>{{user.lastname}}</v-list-tile-title>
+                <v-list-tile-sub-title>Lastname</v-list-tile-sub-title>
+              </v-list-tile-content>
+  
+              <v-list-tile-action>
+                <v-icon>chat</v-icon>
+              </v-list-tile-action>
+            </v-list-tile>
+  
+            <v-divider inset></v-divider>
+  
+            <v-list-tile @click="">
+              <v-list-tile-action>
+                <v-icon color="indigo">mail</v-icon>
+              </v-list-tile-action>
+  
+              <v-list-tile-content>
+                <v-list-tile-title>{{user.email}}</v-list-tile-title>
+                <v-list-tile-sub-title>Work</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+  
+            <!-- <v-list-tile @click="">
+              <v-list-tile-action></v-list-tile-action>
+  
+              <v-list-tile-content>
+                <v-list-tile-title>ali_connors@example.com</v-list-tile-title>
+                <v-list-tile-sub-title>Work</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile> -->
+  
+            <v-divider inset></v-divider>
+  
+            <v-list-tile @click="">
+              <v-list-tile-action>
+                <v-icon color="indigo">admin_panel_settings</v-icon>
+              </v-list-tile-action>
+  
+              <v-list-tile-content>
+                <v-list-tile-title>{{user.role}}</v-list-tile-title>
+                <v-list-tile-sub-title>Statut</v-list-tile-sub-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-card>
+      </v-flex>
+    </v-layout>
+  </div>  
 </template>
 
 <script>
 import {mapState} from 'vuex'
 
 export default {
-  props: [
-    'user'
-  ],
+  // props: [
+  //   'user'
+  // ],
   computed: {
     ...mapState([
       'isUserLoggedIn',
