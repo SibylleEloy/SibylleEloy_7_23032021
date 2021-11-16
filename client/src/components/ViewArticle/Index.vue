@@ -1,25 +1,25 @@
 <template>
-  <div>
-    <v-layout>
-      <v-flex xs6>
-        <article-metadata :article="article" />
-      </v-flex>
+  <v-container>
+    <v-layout wrap>
+      <v-layout wrap>
+        <v-flex xs12>
+          <article-metadata :article="article" />
+        </v-flex>
+        <v-flex xs12 class="mt-2">
+          <texte :article="article" />
+        </v-flex>
+      </v-layout>
 
-      <v-flex xs6 class="ml-2">
-        <texte :article="article" />
-      </v-flex>
-    </v-layout>
-
-    <v-layout>
-      <v-flex xs6>
-        <lien :article="article" />
-      </v-flex>
-
+      
+        <v-flex xs12 class="mt-2">
+          <lien :article="article" />
+        </v-flex>
+      </v-layout>
       <!-- <v-flex xs6 class="ml-2">
         <tab :article="article" />
       </v-flex> -->
-    </v-layout>
-  </div>
+   
+   </v-container>
 </template>
 
 <script>
