@@ -2,6 +2,7 @@
   {
     "firstname": "Pierre",
     "lastname": "Giraud",
+    "username": "Pierre",
     "email": "pgiraud@gmail.com",
     "password": "12345678",
     "role": "Employe"
@@ -9,7 +10,8 @@
    {
     "firstname": "Sibylle",
     "lastname": "Eloy",
-    "email": "seloy@gmail.com",
+    "username": "Sibylle",
+    "email": "sibylleeloy@hotmail.com",
     "password": "12345678",
     "role": "Administrateur"
   }

@@ -27,7 +27,7 @@
           label="Lien"
           required
           :rules="[required]"
-          v-model="article.link"
+          v-model="article.lien"
         ></v-text-field>
 
         <v-text-field

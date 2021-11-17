@@ -9,6 +9,7 @@ module.exports = {
       ),
       firstname: Joi.string().alphanum().min(3).max(30).required(),
       lastname: Joi.string().alphanum().min(3).max(30).required(),
+      username: Joi.string().alphanum().min(3).max(30).required(),
       role: Joi.string().alphanum().min(3).max(30).required()
     }
 
@@ -18,7 +19,7 @@ module.exports = {
       switch (error.details[0].context.key) {
         case 'email':
           res.status(400).send({
-            error: 'You must provide a valid email address'
+            error: 'Vous devez fournir une adresse email valide'
           })
           break
         case 'password':
@@ -33,7 +34,7 @@ module.exports = {
           break
         default:
           res.status(400).send({
-            error: 'Invalid registration information'
+            error: 'Informations non valides'
           })
       }
     } else {

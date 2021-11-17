@@ -24,7 +24,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(400).send({
-        error: 'This email account is already in use.'
+        error: 'Cet email est déjà utilisé'
       })
     }
   },
@@ -41,7 +41,7 @@ module.exports = {
       // si le user n'existe pas
       if (!user) {
         return res.status(403).send({
-          error: 'Les informations de Login sont incorrectes'
+          error: 'Les informations de connexion sont incorrectes'
         })
       }
       // si le user existe on compare le mot de passe de cet user au mdp récupéré dans le body
@@ -61,7 +61,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(500).send({
-        error: 'Une erreur est apparue en vous connectant'
+        error: 'Erreur de connexion'
       })
     }
   },
@@ -76,31 +76,3 @@ module.exports = {
     }
   }
 }
-
-// grantAccess (action, resource) {
-//   return async (req, res, next) => {
-//     try {
-//       const modifiedAction = action
-//       // Check for userId and modify action from updateAny to updateOwn
-//       // when current user updates his/her own info
-//       if (req.user.userId === req.params.userId) {
-//         // eslint-disable-next-line no-const-assign
-//         modifiedAction = action.replace('Any', 'Own')
-//       }
-
-//       // Permission to perform the specified action of the provided resource
-//       const permission = Roles.roles.can(req.user.role)[modifiedAction](resource)
-//       // No permission => 401
-//       if (!permission.granted) {
-//         // eslint-disable-next-line no-undef
-//         throw new ErrorHandlers.ErrorHandler(
-//           401,
-//           "You don't have enough permission to perform this action"
-//         )
-//       }
-//       next()
-//     } catch (error) {
-//       next(error)
-//     }
-//   }
-// }

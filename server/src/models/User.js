@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     firstname: DataTypes.STRING,
     lastname: DataTypes.STRING,
+    username: DataTypes.STRING,
     role: DataTypes.ENUM(['Employe', 'Administrateur'])
   }, {
     // avant d'enregistrer l'objet User, on hash le password
@@ -45,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
   }
 
   User.associate = function (models) {
+    // User.hasMany(Article)
   }
 
   return User

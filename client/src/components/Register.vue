@@ -16,6 +16,11 @@
           ></v-text-field>
           <br>
           <v-text-field
+            label="Identifiant"
+            v-model="username"
+          ></v-text-field>
+          <br>
+          <v-text-field
             label="Email"
             v-model="email"
           ></v-text-field>
@@ -59,6 +64,7 @@ export default {
     roles: ['Administrateur', 'Employe'],
     firstname: '',
     lastname: '',
+    username: '',
     email: '',
     password: '',
     error: null,
@@ -70,6 +76,7 @@ export default {
       return {
         firstname: this.firstname,
         lastname: this.lastname,
+        username: this.username,
         email: this.email,
         password: this.password,
         role: this.roles
@@ -84,6 +91,7 @@ export default {
           password: this.password,
           firstname: this.firstname,
           lastname: this.lastname,
+          username: this.username,
           role: this.role
         })
         this.$store.dispatch('setToken', response.data.token)

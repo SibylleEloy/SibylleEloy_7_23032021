@@ -15,4 +15,5 @@ npm start
 cd server
 npm install
 npm start
+npm run seed
 ```
