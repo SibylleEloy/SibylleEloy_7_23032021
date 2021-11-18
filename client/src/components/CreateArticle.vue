@@ -2,6 +2,13 @@
   <v-layout>
     <v-flex xs4>
       <panel title="Détails de l'article">
+      <v-text-field
+          label="Votre identifiant"
+          required
+          :rules="[required]"
+          v-model="article.username"
+        ></v-text-field>
+
         <v-text-field
           label="Titre"
           required
@@ -72,6 +79,7 @@ export default {
   data () {
     return {
       article: {
+        username: null,
         titre: null,
         auteur: null,
         source: null,
@@ -95,7 +103,12 @@ export default {
       }
 
       try {
-        await ArticlesService.post(this.article)
+        await ArticlesService.post({
+          // données du formulaire
+          ...this.article,
+          // on recupère l'id du user loggé
+          user_id: this.$store.state.user.id
+        })
         this.$router.push({
           name: 'articles'
         })

@@ -11,8 +11,9 @@
         <div class="article-source">
           {{article.source}}
         </div>
+    
 
-        <v-btn
+        <!-- <v-btn
           dark
           class="black"
           :to="{
@@ -24,14 +25,14 @@
             }
           }">
           Sauvegarder
-        </v-btn>
+        </v-btn> -->
 
         <v-btn
           v-if="isUserLoggedIn && !bookmark"
           dark
           class="black"
           @click="setAsBookmark">
-          Créér un favori
+          Mettre favori
         </v-btn>
 
         <v-btn
@@ -43,7 +44,7 @@
         </v-btn>
 
         <v-btn
-            v-if="isUserLoggedIn"
+            v-if="isUserLoggedIn && isAuthor"
             dark
             class="black"
             :to="{
@@ -56,11 +57,11 @@
           </v-btn>
 
         <v-btn
-          v-if="isUserLoggedIn"
+          v-if="isUserLoggedIn && isAuthor"
           dark
           class="black"
           @click="deleteArticle">
-          Supprimer l'article
+          Supprimer
         </v-btn>
       </v-flex>
 
@@ -90,7 +91,10 @@ export default {
     ...mapState([
       'isUserLoggedIn',
       'user'
-    ])
+    ]),
+    isAuthor () {
+      return this.article.user_id === this.user.id
+    }
   },
   watch: {
     async article () {

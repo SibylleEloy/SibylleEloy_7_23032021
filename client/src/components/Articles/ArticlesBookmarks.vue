@@ -9,7 +9,7 @@
           {{props.item.titre}}
         </td>
         <td class="text-xs-right">
-          {{props.item.source}}
+          {{props.item.username}}
         </td>
       </template>
     </v-data-table>
@@ -30,8 +30,8 @@ export default {
           value: 'titre'
         },
         {
-          text: 'Source',
-          value: 'source'
+          text: 'Posté par',
+          value: 'username'
         }
       ],
       pagination: {

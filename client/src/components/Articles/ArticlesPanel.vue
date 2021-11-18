@@ -28,7 +28,7 @@ qui fetch les articles de la db/backend et le affiche (plutôt que depuis l'Inde
             {{article.titre}}
           </div>
           <div class="article-source">
-            par {{article.auteur}}
+            posté par {{article.username}}
           </div>
           <br>
           <v-btn

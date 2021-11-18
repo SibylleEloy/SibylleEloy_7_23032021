@@ -3,6 +3,13 @@
     <v-flex xs4>
       <panel title="Détails de l'article">
         <v-text-field
+          label="Votre identifiant"
+          required
+          :rules="[required]"
+          v-model="article.username"
+        ></v-text-field>
+
+        <v-text-field
           label="Titre"
           required
           :rules="[required]"
@@ -71,6 +78,7 @@ export default {
   data () {
     return {
       article: {
+        username: null,
         titre: null,
         auteur: null,
         source: null,

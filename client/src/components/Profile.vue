@@ -57,7 +57,7 @@
         
                     <v-list-tile-content>
                       <v-list-tile-title>{{user.email}}</v-list-tile-title>
-                      <v-list-tile-sub-title>Work</v-list-tile-sub-title>
+                      <v-list-tile-sub-title>Professionnel</v-list-tile-sub-title>
                     </v-list-tile-content>
                   </v-list-tile>
         

@@ -9,8 +9,6 @@
           <texte :article="article" />
         </v-flex>
       </v-layout>
-
-      
         <v-flex xs12 class="mt-2">
           <lien :article="article" />
         </v-flex>
