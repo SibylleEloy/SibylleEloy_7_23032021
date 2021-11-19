@@ -108,6 +108,9 @@ export default {
           // renvoie le bon bookmark
           this.bookmark = bookmarks[0]
         }
+        await MessagesService.index({
+          articleId: this.article.id
+        }).data
       } catch (err) {
         console.log(err)
       }
@@ -159,21 +162,21 @@ export default {
     },
     async showMessages () {
       try {
-        const messages = (await MessagesService.index({
+         // requête delete envoyée au backend
+        await MessagesService.index({
           // plus besoin de userid car il est extrait du jwt token du backend
           articleId: this.article.id
-        })).data
-        if (messages.length) {
-          // renvoie le bon bookmark
-          this.message = messages[0]
-        }
+        }).data
+        // if (messages.length) {
+        //   // renvoie le bon bookmark
+        //   this.message = messages[0]
+        // }
       } catch (err) {
         console.log(err)
       }
     },
     async clearMessage () {
       try {
-        // requête delete envoyée au backend
         await MessagesService.delete(this.message.id)
         this.message = null
       } catch (err) {

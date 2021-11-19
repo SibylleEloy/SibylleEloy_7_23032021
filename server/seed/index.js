@@ -3,7 +3,8 @@ const {
   Article,
   User,
   Bookmark,
-  History
+  History,
+  Message
 } = require('../src/models')
 
 // on installe bluebird pour d'abord installer users et articles avant de pouvoir faire quoique ce soit
@@ -12,6 +13,7 @@ const articles = require('./articles.json')
 const users = require('./users.json')
 const bookmarks = require('./bookmarks.json')
 const histories = require('./histories.json')
+const messages = require('./messages.json')
 
 sequelize.sync({force: true})
   .then(async function () {
@@ -36,6 +38,12 @@ sequelize.sync({force: true})
     await Promise.all(
       histories.map(history => {
         History.create(history)
+      })
+    )
+
+     await Promise.all(
+      messages.map(message => {
+        Message.create(message)
       })
     )
   })

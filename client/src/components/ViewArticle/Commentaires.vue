@@ -1,12 +1,10 @@
 <template>
   <panel title="Commentaires">
      <v-container fluid>
-          <v-textarea
-            label="Text"
-            no-resize
-            rows="1"
-            :value="value"
-          ></v-textarea>
+     <v-text-field
+            label="Postez votre commentaire ici"
+            v-model="texte"
+          ></v-text-field>
         </v-container>
      <v-btn
           v-show="isUserLoggedIn"
@@ -15,6 +13,19 @@
           @click="sendMessage">
           Send
         </v-btn>
+        <v-data-table
+          :headers="headers"
+          :pagination.sync="pagination"
+          :items="messages">
+          <template slot="items" scope="props">
+            <td class="text-xs-right">
+              {{props.item.titre}}
+            </td>
+            <td class="text-xs-right">
+              {{props.item.username}}
+            </td>
+          </template>
+        </v-data-table>
     <!-- <textarea
       readonly
       v-model="message.commentaires"
@@ -30,14 +41,23 @@ import MessagesService from '@/services/MessagesService'
 
 export default {
   // afficher les messages des articles
-  props: [
-    'article',
-    'message'
-  ],
   data () {
     return {
-      message: null,
-      value: null
+      headers: [
+        {
+          text: 'Titre',
+          value: 'titre'
+        },
+        {
+          text: 'Posté par',
+          value: 'username'
+        }
+      ],
+      pagination: {
+        sortBy: 'createdAt',
+        descending: true
+      },
+      messages: []
     }
   },
   computed: {
@@ -47,6 +67,10 @@ export default {
       'isAuthor'
     ])
   },
+   // requête au backend pour afficher les messages du user connecté (sans passer ici le userid de la querystring mais le bearer authorization du jwt token)
+  // async mounted () {
+  //   this.messages = (await MessagesService.index()).data
+  // },
   methods: {
     async sendMessage () {
       try {
@@ -59,14 +83,14 @@ export default {
     },
     async showMessages () {
       try {
-        const messages = (await MessagesService.index({
+        await MessagesService.index({
           // plus besoin de userid car il est extrait du jwt token du backend
           articleId: this.article.id
-        })).data
-        if (messages.length) {
-          // renvoie le bon bookmark
-          this.message = messages[0]
-        }
+        }).data
+        // if (messages.length) {
+        //   // renvoie le bon bookmark
+        //   this.message = messages[0]
+        // }
       } catch (err) {
         console.log(err)
       }

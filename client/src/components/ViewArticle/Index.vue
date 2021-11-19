@@ -26,13 +26,17 @@ import {mapState} from 'vuex'
 import ArticleMetadata from './ArticleMetadata'
 import Texte from './Texte'
 import Lien from './Lien'
+import Commentaires from './Commentaires'
 import ArticlesService from '@/services/ArticlesService'
 import ArticleHistoryService from '@/services/ArticleHistoryService'
-import Commentaires from './Commentaires'
+
 // import MessagesService from './services/MessagesServices'
 
 // fetching les articles
 export default {
+  props: [
+    'message'
+  ],
   data () {
     return {
       article: {}
@@ -49,12 +53,20 @@ export default {
     const articleId = this.route.params.articleId
     this.article = (await ArticlesService.show(articleId)).data
 
+    // const messages = (await MessagesService.index({
+    //   articleId: this.article.id
+    // })).data
+    // return messages
+
     if (this.isUserLoggedIn) {
       // dès que l'utilisateur est sur la page ViewArticle, une requête post est faite à l'HistoryService pour afficher les articles vus par cet utilisateur
       ArticleHistoryService.post({
         articleId: articleId
         // on ne passe pas le userid car autorisation avec jwt token
       })
+      // MessagesService.index({
+      //   articleId: articleId
+      // })
     }
   },
   components: {

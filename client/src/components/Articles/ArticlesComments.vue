@@ -1,5 +1,5 @@
 <template>
-  <panel title="Messages">
+  <panel title="Commentaires">
     <v-data-table
       :headers="headers"
       :pagination.sync="pagination"
@@ -20,7 +20,7 @@
 import {mapState} from 'vuex'
 import MessagesService from '@/services/MessagesService'
 
-// fait des requêtes au backend pour vérifier quels messagess sont associés au user et à quel article
+// fait des requêtes au backend pour vérifier quels messages sont associés au user et à quel article
 export default {
   data () {
     return {
@@ -43,8 +43,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'isUserLoggedIn',
-      'user'
+      'isUserLoggedIn'
     ])
   },
   // requête au backend pour afficher les messages du user connecté (sans passer ici le userid de la querystring mais le bearer authorization du jwt token)

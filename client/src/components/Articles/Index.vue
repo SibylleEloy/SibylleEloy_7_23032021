@@ -9,6 +9,12 @@
           <recently-viewed-articles class="ml-2" />
         </v-flex>
       </v-layout>
+      <v-layout>
+        <v-flex xs12 v-if="isUserLoggedIn">
+          <articles-comments class="mt-2"/>
+        </v-flex>
+      </v-layout>
+
 
       <v-flex :class="{
           xs12: !isUserLoggedIn,
@@ -25,6 +31,7 @@
 import ArticlesPanel from './ArticlesPanel'
 import ArticlesBookmarks from './ArticlesBookmarks'
 import RecentlyViewedArticles from './RecentlyViewedArticles'
+import ArticlesComments from './ArticlesComments'
 import ArticlesSearchPanel from './ArticlesSearchPanel'
 import ArticlesService from '@/services/ArticlesService'
 import {mapState} from 'vuex'
@@ -34,7 +41,8 @@ export default {
     ArticlesPanel,
     ArticlesSearchPanel,
     ArticlesBookmarks,
-    RecentlyViewedArticles
+    RecentlyViewedArticles,
+    ArticlesComments
   },
   computed: {
     ...mapState([
