@@ -3,6 +3,7 @@ const AuthenticationControllerPolicy = require('./policies/AuthenticationControl
 const ArticlesController = require('./controllers/ArticlesController')
 const BookmarksController = require('./controllers/BookmarksController')
 const HistoriesController = require('./controllers/HistoriesController')
+const MessagesController = require('./controllers/MessagesController')
 
 // authentification des routes sensibles
 const isAuthenticated = require('./policies/isAuthenticated')
@@ -55,4 +56,15 @@ module.exports = (app) => {
   app.post('/histories',
     isAuthenticated,
     HistoriesController.post)
+
+     // pour messages aussi, on utilise un endpoint authentification : le user doit être connecté, il doit y avoir ce jwt token qui doit être valide et connecté au bon utilisateur
+  app.get('/messages',
+    isAuthenticated,
+    MessagesController.index)
+  app.post('/messages',
+    isAuthenticated,
+    MessagesController.post)
+  app.delete('/messages/:messageId',
+    isAuthenticated,
+    MessagesController.remove)
 }

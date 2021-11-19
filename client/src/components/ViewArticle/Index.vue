@@ -13,9 +13,9 @@
           <lien :article="article" />
         </v-flex>
       </v-layout>
-      <!-- <v-flex xs6 class="ml-2">
-        <tab :article="article" />
-      </v-flex> -->
+      <v-flex xs12 class="mt-2">
+        <commentaires :message="message" />
+      </v-flex>
    
    </v-container>
 </template>
@@ -28,6 +28,8 @@ import Texte from './Texte'
 import Lien from './Lien'
 import ArticlesService from '@/services/ArticlesService'
 import ArticleHistoryService from '@/services/ArticleHistoryService'
+import Commentaires from './Commentaires'
+// import MessagesService from './services/MessagesServices'
 
 // fetching les articles
 export default {
@@ -58,7 +60,8 @@ export default {
   components: {
     ArticleMetadata,
     Texte,
-    Lien
+    Lien,
+    Commentaires
   }
 }
 </script>

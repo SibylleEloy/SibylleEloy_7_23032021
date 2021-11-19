@@ -2,7 +2,7 @@
   <panel title="En savoir plus">
    <a v-bind:href="article.lien">
    VISIT WEBSITE
-</a>
+   </a>
   </panel>
 </template>
 

@@ -43,21 +43,16 @@
           Supprimer le favori
         </v-btn>
 
-        <v-btn
-            v-if="isUserLoggedIn && isAuthor"
+        <!-- <v-btn
+            v-show="isUserLoggedIn && isAuthor"
             dark
             class="black"
-            :to="{
-              name: 'article-edit', 
-              params: {
-                articleId: article.id
-              }
-            }">
+            @click="updateArticle">
             Editer
-          </v-btn>
+          </v-btn> -->
 
         <v-btn
-          v-if="isUserLoggedIn && isAuthor"
+          v-show="isUserLoggedIn && isAuthor"
           dark
           class="black"
           @click="deleteArticle">
@@ -77,6 +72,7 @@
 import {mapState} from 'vuex'
 import BookmarksService from '@/services/BookmarksService'
 import ArticlesService from '@/services/ArticlesService'
+import MessagesService from '@/services/MessagesService'
 
 export default {
   props: [
@@ -84,17 +80,17 @@ export default {
   ],
   data () {
     return {
-      bookmark: null
+      bookmark: null,
+      message: null,
+      value: null
     }
   },
   computed: {
     ...mapState([
       'isUserLoggedIn',
-      'user'
-    ]),
-    isAuthor () {
-      return this.article.user_id === this.user.id
-    }
+      'user',
+      'isAuthor'
+    ])
   },
   watch: {
     async article () {
@@ -137,6 +133,9 @@ export default {
       }
     },
     async deleteArticle () {
+      if (!this.isAuthor) {
+        return
+      }
       try {
         // requête delete envoyée au backend
         await ArticlesService.delete(this.article.id)
@@ -148,7 +147,56 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    async sendMessage () {
+      try {
+        this.message = (await MessagesService.post({
+          articleId: this.article.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async showMessages () {
+      try {
+        const messages = (await MessagesService.index({
+          // plus besoin de userid car il est extrait du jwt token du backend
+          articleId: this.article.id
+        })).data
+        if (messages.length) {
+          // renvoie le bon bookmark
+          this.message = messages[0]
+        }
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async clearMessage () {
+      try {
+        // requête delete envoyée au backend
+        await MessagesService.delete(this.message.id)
+        this.message = null
+      } catch (err) {
+        console.log(err)
+      }
     }
+
+    // async updateArticle () {
+    //   if (!this.isAuthor) {
+    //     return
+    //   }
+    //   try {
+    //     // requête delete envoyée au backend
+    //     await ArticlesService.put(this.article.id)
+    //     this.article = null
+    //      // dès qu'on est loggé, on est redirigé avec la page articles
+    //     this.$router.push({
+    //       name: 'articles'
+    //     })
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // }
   }
 }
 </script>
