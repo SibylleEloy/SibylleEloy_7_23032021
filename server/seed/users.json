@@ -14,5 +14,29 @@
     "email": "seloy@gmail.com",
     "password": "12345678",
     "role": "Administrateur"
+  },
+     {
+    "firstname": "Test",
+    "lastname": "Uno",
+    "username": "Uno",
+    "email": "test1@gmail.com",
+    "password": "12345678",
+    "role": "Administrateur"
+  },
+     {
+    "firstname": "Test",
+    "lastname": "Deux",
+    "username": "Deux",
+    "email": "test2@gmail.com",
+    "password": "12345678",
+    "role": "Employe"
+  },
+     {
+    "firstname": "Test",
+    "lastname": "Trois",
+    "username": "Trois",
+    "email": "test3@gmail.com",
+    "password": "12345678",
+    "role": "Administrateur"
   }
 ]

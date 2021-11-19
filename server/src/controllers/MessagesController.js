@@ -3,7 +3,7 @@ const {
   Article
 } = require('../models')
 // lodash pour la méthode extend
-// const _ = require('lodash')
+const _ = require('lodash')
 
 module.exports = {
   async index (req, res) {
@@ -11,31 +11,29 @@ module.exports = {
       // let messages = null
       // un user doit pouvoir chercher un message à partir de l'id d'un article
       // req.user.id vient du jwt token qui a été validé (et non plus de la querystring)
-      // const userId = req.user.id
+      const userId = req.user.id
       const {articleId} = req.query
       const where = {
-        ArticleId: articleId
+        UserId: userId
       }
       if (articleId) {
         where.ArticleId = articleId
       }
       const messages = await Message.findAll({
-        where: where,
-        // option include dans sequelize pour passer un array d'objets (ici articles) qu'on veut inclure en association avec le message
+        // where: where,
         include: [
           {
             model: Article
           }
         ]
       })
-      // })
-      //   .map(message => message.toJSON())
-      //   // on créé un nouvel objet avec extend avec message id et article associé
-      //   .map(message => _.extend(
-      //     {},
-      //     message.Article,
-      //     message
-      //   ))
+        .map(message => message.toJSON())
+        // on créé un nouvel objet avec extend avec message id et article associé
+        .map(message => _.extend(
+          {},
+          message.Article,
+          message
+        ))
       res.send(messages)
     } catch (err) {
       res.status(500).send({

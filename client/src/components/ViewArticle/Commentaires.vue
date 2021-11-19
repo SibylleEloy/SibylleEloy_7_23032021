@@ -26,6 +26,7 @@
             </td>
           </template>
         </v-data-table>
+         <!-- <pre>{{message.username}}</pre> -->
     <!-- <textarea
       readonly
       v-model="message.commentaires"
@@ -40,9 +41,13 @@ import {mapState} from 'vuex'
 import MessagesService from '@/services/MessagesService'
 
 export default {
+  props: [
+    'article'
+  ],
   // afficher les messages des articles
   data () {
     return {
+      texte: '',
       headers: [
         {
           text: 'Titre',
@@ -67,9 +72,35 @@ export default {
       'isAuthor'
     ])
   },
-   // requête au backend pour afficher les messages du user connecté (sans passer ici le userid de la querystring mais le bearer authorization du jwt token)
-  // async mounted () {
-  //   this.messages = (await MessagesService.index()).data
+  //  requête au backend pour afficher les messages du user connecté (sans passer ici le userid de la querystring mais le bearer authorization du jwt token)
+  async mounted () {
+    if (this.isUserLoggedIn) {
+      this.messages = (await MessagesService.index()).data
+    }
+  },
+  // watch: {
+  //   async article () {
+  //     if (!this.isUserLoggedIn) {
+  //       return
+  //     }
+
+  //     try {
+  //       // appel du MessagesService avec les params
+  //       const messages = (await MessagesService.index({
+  //         // plus besoin de userid car il est extrait du jwt token du backend
+  //         articleId: this.article.id
+  //       })).data
+  //       if (messages.length) {
+  //         // renvoie le bon bookmark
+  //         this.message = messages[0]
+  //       }
+  //       // await MessagesService.index({
+  //       //   articleId: this.article.id
+  //       // }).data
+  //     } catch (err) {
+  //       console.log(err)
+  //     }
+  //   }
   // },
   methods: {
     async sendMessage () {
@@ -83,14 +114,14 @@ export default {
     },
     async showMessages () {
       try {
-        await MessagesService.index({
+        const messages = await MessagesService.index({
           // plus besoin de userid car il est extrait du jwt token du backend
           articleId: this.article.id
         }).data
-        // if (messages.length) {
-        //   // renvoie le bon bookmark
-        //   this.message = messages[0]
-        // }
+        if (messages.length) {
+          // renvoie le bon bookmark
+          this.message = messages[0]
+        }
       } catch (err) {
         console.log(err)
       }
