@@ -1,39 +1,37 @@
 const {
-  Message,
-  Article
+  Message
 } = require('../models')
 // lodash pour la méthode extend
-const _ = require('lodash')
+// const _ = require('lodash')
 
 module.exports = {
   async index (req, res) {
     try {
-      // let messages = null
+      let messages = null
       // un user doit pouvoir chercher un message à partir de l'id d'un article
       // req.user.id vient du jwt token qui a été validé (et non plus de la querystring)
-      const userId = req.user.id
-      const {articleId} = req.query
-      const where = {
-        UserId: userId
-      }
-      if (articleId) {
-        where.ArticleId = articleId
-      }
-      const messages = await Message.findAll({
-        // where: where,
-        include: [
-          {
-            model: Article
-          }
-        ]
-      })
-        .map(message => message.toJSON())
-        // on créé un nouvel objet avec extend avec message id et article associé
-        .map(message => _.extend(
-          {},
-          message.Article,
-          message
-        ))
+      // const userId = req.user.id
+      // const {articleId} = req.query
+      // const where = {
+      //   UserId: userId
+      // }
+      // if (articleId) {
+      //   where.ArticleId = articleId
+      // }
+      messages = await Message.findAll()
+      // where: where,
+      // include: [
+      //   {
+      //     model: Article, Message
+      //   }
+      // ]
+      // .map(message => message.toJSON())
+      // // on créé un nouvel objet avec extend avec message id et article associé
+      // .map(message => _.extend(
+      //   {},
+      //   message.Article,
+      //   message
+      // ))
       res.send(messages)
     } catch (err) {
       res.status(500).send({

@@ -2,7 +2,7 @@ module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
     titre: DataTypes.STRING,
     username: DataTypes.STRING,
-    texte: DataTypes.TEXT,
+    title: DataTypes.TEXT,
     date: DataTypes.DATE
   })
 

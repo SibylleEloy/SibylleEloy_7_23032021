@@ -1,14 +1,14 @@
 [
   {
     "ArticleId": 1,
-    "titre": "Titre1",
+    "title": "Titre1",
     "username": "Pierre",
     "texte": "xxxx",
     "date": "12-10-2021"
   },
    {
     "ArticleId": 1,
-    "titre": "Titre2",
+    "title": "Titre2",
     "username": "Sibylle",
     "texte": "Bonjour",
     "date": "12-10-2021"
