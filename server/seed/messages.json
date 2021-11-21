@@ -12,6 +12,13 @@
     "username": "Sibylle",
     "texte": "Bonjour",
     "date": "12-10-2021"
+  },
+    {
+    "ArticleId": 2,
+    "title": "Titre3",
+    "username": "Sibylle",
+    "texte": "Bonjour",
+    "date": "12-10-2021"
   }
 ]
   
