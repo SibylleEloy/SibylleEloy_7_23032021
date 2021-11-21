@@ -1,21 +1,21 @@
 [
   {
     "ArticleId": 1,
-    "title": "Titre1",
+    "title": "Incorrect",
     "username": "Pierre",
     "texte": "xxxx",
     "date": "12-10-2021"
   },
    {
     "ArticleId": 1,
-    "title": "Titre2",
+    "title": "Intéressant pour le prochain séminaire",
     "username": "Sibylle",
     "texte": "Bonjour",
     "date": "12-10-2021"
   },
     {
     "ArticleId": 2,
-    "title": "Titre3",
+    "title": "Pour l'équipe commerciale",
     "username": "Sibylle",
     "texte": "Bonjour",
     "date": "12-10-2021"

@@ -34,7 +34,20 @@ module.exports = {
             message
           ))
       } else {
-        messages = await Message.findAll()
+        messages = await Message.findAll({
+          include: [
+            {
+              model: Article, Message
+            }
+          ]
+        })
+          .map(message => message.toJSON())
+          // on créé un nouvel objet avec extend avec message id et article associé
+          .map(message => _.extend(
+            {},
+            message.Article,
+            message
+          ))
       }
       res.send(messages)
     } catch (err) {

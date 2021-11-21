@@ -6,10 +6,13 @@
       :items="messages">
       <template slot="items" scope="props">
         <td class="text-xs-right">
-          {{props.item.titre}}
+          {{props.item.title}}
+        </td>
+         <td class="text-xs-right">
+          {{props.item.username}}
         </td>
         <td class="text-xs-right">
-          {{props.item.username}}
+          {{props.item.titre}}
         </td>
       </template>
     </v-data-table>
@@ -32,6 +35,10 @@ export default {
         {
           text: 'Posté par',
           value: 'username'
+        },
+        {
+          text: 'Article',
+          value: 'titre'
         }
       ],
       pagination: {

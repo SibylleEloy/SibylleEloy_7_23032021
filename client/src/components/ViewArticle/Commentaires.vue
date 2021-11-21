@@ -1,24 +1,17 @@
 <template>
   <panel title="Commentaires">
      <v-container fluid>
-  
-          <v-text-field
-            label="Votre identifiant"
-            required
-            :rules="[required]"
-            v-model="message.username"
-          ></v-text-field>
-          <v-text-field
+     <v-text-field
             label="Postez votre commentaire ici"
-            v-model="message.texte"
+            v-model="texte"
           ></v-text-field>
-       
         </v-container>
-          <v-btn
+     <v-btn
+          v-show="isUserLoggedIn"
           dark
           class="black"
-          @click="createMessage">
-          Envoyer
+          @click="sendMessage">
+          Send
         </v-btn>
         <v-data-table
           :headers="headers"
@@ -26,17 +19,13 @@
           :items="messages">
           <template slot="items" scope="props">
             <td class="text-xs-right">
-              {{props.item.texte}}
+              {{props.item.titre}}
             </td>
             <td class="text-xs-right">
               {{props.item.username}}
             </td>
-            <td class="text-xs-right">
-              {{props.item.source}}
-            </td>
           </template>
         </v-data-table>
-         <!-- <pre>{{message.username}}</pre> -->
     <!-- <textarea
       readonly
       v-model="message.commentaires"
@@ -45,50 +34,99 @@
 </template>
 
 <script>
+// les métadonnées
+import {mapState} from 'vuex'
+// import ArticlesService from '@/services/ArticlesService'
 import MessagesService from '@/services/MessagesService'
 
 export default {
+  props: [
+    'article'
+  ],
+  // afficher les messages des articles
   data () {
     return {
-      message: {
-        username: null,
-        title: null,
-        texte: null
-      },
-      messages: [],
       headers: [
         {
           text: 'Titre',
-          value: 'title'
+          value: 'titre'
         },
         {
           text: 'Posté par',
           value: 'username'
-        },
-        {
-          text: 'Article',
-          value: 'source'
         }
       ],
       pagination: {
         sortBy: 'createdAt',
         descending: true
       },
-      error: null,
-      required: (value) => !!value || 'Obligatoire.'
-      // error: null,
-      // required: (value) => !!value || 'Obligatoire.'
-      // texte: '',
-  // computed: {
-  //   ...mapState([
-  //     'isUserLoggedIn',
-  //     'user',
-  //     'isAuthor'
-  //   ])
+      messages: []
     }
   },
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user',
+      'isAuthor'
+    ])
+  },
+  //  requête au backend pour afficher les messages du user connecté (sans passer ici le userid de la querystring mais le bearer authorization du jwt token)
   async mounted () {
-    this.messages = (await MessagesService.index()).data
+    const articleId = this.route.params.articleId
+    this.messages = (await MessagesService.index({
+      articleId: articleId
+    })).data
+  },
+  methods: {
+    async sendMessage () {
+      try {
+        this.message = (await MessagesService.post({
+          articleId: this.article.id
+        })).data
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async showMessages () {
+      try {
+        await MessagesService.index({
+          // plus besoin de userid car il est extrait du jwt token du backend
+          articleId: this.article.id
+        }).data
+        // if (messages.length) {
+        //   // renvoie le bon bookmark
+        //   this.message = messages[0]
+        // }
+      } catch (err) {
+        console.log(err)
+      }
+    },
+    async clearMessage () {
+      try {
+        // requête delete envoyée au backend
+        await MessagesService.delete(this.message.id)
+        this.message = null
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    // async updateArticle () {
+    //   if (!this.isAuthor) {
+    //     return
+    //   }
+    //   try {
+    //     // requête delete envoyée au backend
+    //     await ArticlesService.put(this.article.id)
+    //     this.article = null
+    //      // dès qu'on est loggé, on est redirigé avec la page articles
+    //     this.$router.push({
+    //       name: 'articles'
+    //     })
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // }
   }
 }
 </script>
