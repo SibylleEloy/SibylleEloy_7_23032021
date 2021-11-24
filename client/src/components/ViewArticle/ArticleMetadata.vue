@@ -1,4 +1,5 @@
 <template>
+  <div>
   <panel title="Détails de l'article">
     <v-layout>
       <v-flex xs6>
@@ -65,6 +66,43 @@
       </v-flex>
     </v-layout>
   </panel>
+    <panel title="Commentaires" class="mt-2">
+     <!-- <v-container fluid>
+     <v-text-field
+            label="Postez votre commentaire ici"
+            v-model="texte"
+          ></v-text-field>
+        </v-container>
+     <v-btn
+          v-show="isUserLoggedIn"
+          dark
+          class="black"
+          @click="sendMessage">
+          Send
+        </v-btn> -->
+        <v-data-table
+          :headers="headers"
+          :pagination.sync="pagination"
+          :items="messages">
+          <template slot="items" scope="props">
+            <td class="text-xs-right">
+              {{props.item.titre}}
+            </td>
+            <td class="text-xs-right">
+              {{props.item.username}}
+            </td>
+            <ul>
+              <li v-for="message in messages" v-bind:key="messages.username">{{ message.title }}</li>
+              <li v-for="message in messages">{{ message.username }}</li>
+            </ul>
+          </template>
+        </v-data-table>
+    <!-- <textarea
+      readonly
+      v-model="message.commentaires"
+    >Hello</textarea> -->
+  </panel>
+  </div>
 </template>
 
 <script>
@@ -82,7 +120,22 @@ export default {
     return {
       bookmark: null,
       message: null,
-      value: null
+      value: null,
+      messages: [],
+      headers: [
+        {
+          text: 'Titre',
+          value: 'titre'
+        },
+        {
+          text: 'Posté par',
+          value: 'username'
+        }
+      ],
+      pagination: {
+        sortBy: 'createdAt',
+        descending: true
+      }
     }
   },
   computed: {
@@ -108,9 +161,9 @@ export default {
           // renvoie le bon bookmark
           this.bookmark = bookmarks[0]
         }
-        await MessagesService.index({
+        this.messages = (await MessagesService.index({
           articleId: this.article.id
-        }).data
+        })).data
       } catch (err) {
         console.log(err)
       }

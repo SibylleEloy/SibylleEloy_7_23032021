@@ -26,10 +26,9 @@ import {mapState} from 'vuex'
 import ArticleMetadata from './ArticleMetadata'
 import Texte from './Texte'
 import Lien from './Lien'
-import Commentaires from './Commentaires'
+// import Commentaires from './Commentaires'
 import ArticlesService from '@/services/ArticlesService'
 import ArticleHistoryService from '@/services/ArticleHistoryService'
-
 // import MessagesService from './services/MessagesServices'
 
 // fetching les articles
@@ -39,7 +38,8 @@ export default {
   ],
   data () {
     return {
-      article: {}
+      article: {},
+      messages: []
     }
   },
   computed: {
@@ -72,8 +72,7 @@ export default {
   components: {
     ArticleMetadata,
     Texte,
-    Lien,
-    Commentaires
+    Lien
   }
 }
 </script>

@@ -26,6 +26,7 @@ module.exports = (app) => {
   app.get('/articles',
     ArticlesController.index)
   app.get('/articles/:articleId',
+    isAuthenticated,
     ArticlesController.show)
   // appelle le contrôleur article avec la méthode put
   app.put('/articles/:articleId',
@@ -36,6 +37,7 @@ module.exports = (app) => {
     ArticlesController.post)
   app.delete('/articles/:articleId',
     isAuthenticated,
+    isAdmin,
     ArticlesController.remove)
 
   // pour bookmarks et histories, on utilise un endpoint authentification : le user doit être connecté, il doit y avoir ce jwt token qui doit être valide et connecté au bon utilisateur
