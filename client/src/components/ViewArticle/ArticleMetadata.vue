@@ -66,35 +66,45 @@
       </v-flex>
     </v-layout>
   </panel>
+  <!-- Section Poster un commentaire -->
     <panel title="Commentaires" class="mt-2">
-     <!-- <v-container fluid>
-     <v-text-field
-            label="Postez votre commentaire ici"
-            v-model="texte"
-          ></v-text-field>
-        </v-container>
+      <form 
+          name="form"
+          autocomplete="off">
+        <v-container fluid>
+                <v-text-field
+                label="Votre identifiant"
+                v-model="username"
+              ></v-text-field>
+        <v-text-field
+                label="Postez votre commentaire ici"
+                v-model="comment"
+              ></v-text-field>
+            </v-container>
+      </form>
      <v-btn
-          v-show="isUserLoggedIn"
+          v-if="isUserLoggedIn"
           dark
           class="black"
           @click="sendMessage">
           Send
-        </v-btn> -->
+        </v-btn>
+  <!-- Section Affichage des commentaires -->
         <v-data-table
           :headers="headers"
           :pagination.sync="pagination"
           :items="messages">
           <template slot="items" scope="props">
             <td class="text-xs-right">
-              {{props.item.titre}}
+              {{props.item.comment}}
             </td>
             <td class="text-xs-right">
               {{props.item.username}}
             </td>
-            <ul>
+            <!-- <ul>
               <li v-for="message in messages" v-bind:key="messages.username">{{ message.title }}</li>
               <li v-for="message in messages">{{ message.username }}</li>
-            </ul>
+            </ul> -->
           </template>
         </v-data-table>
     <!-- <textarea
@@ -119,13 +129,14 @@ export default {
   data () {
     return {
       bookmark: null,
+      comment: '',
+      username: '',
       message: null,
-      value: null,
       messages: [],
       headers: [
         {
-          text: 'Titre',
-          value: 'titre'
+          text: 'Commentaire',
+          value: 'comment'
         },
         {
           text: 'Posté par',
@@ -143,7 +154,13 @@ export default {
       'isUserLoggedIn',
       'user',
       'isAuthor'
-    ])
+    ]),
+    form () {
+      return {
+        username: this.username,
+        comment: this.comment
+      }
+    }
   },
   watch: {
     async article () {
@@ -161,6 +178,7 @@ export default {
           // renvoie le bon bookmark
           this.bookmark = bookmarks[0]
         }
+        // appel du MessagesService avec les params
         this.messages = (await MessagesService.index({
           articleId: this.article.id
         })).data
@@ -207,27 +225,33 @@ export default {
     async sendMessage () {
       try {
         this.message = (await MessagesService.post({
+          username: this.username,
+          comment: this.comment,
           articleId: this.article.id
         })).data
+        // this.$router.go()
       } catch (err) {
         console.log(err)
       }
     },
-    async showMessages () {
-      try {
-         // requête delete envoyée au backend
-        await MessagesService.index({
-          // plus besoin de userid car il est extrait du jwt token du backend
-          articleId: this.article.id
-        }).data
-        // if (messages.length) {
-        //   // renvoie le bon bookmark
-        //   this.message = messages[0]
-        // }
-      } catch (err) {
-        console.log(err)
-      }
-    },
+    // async showMessages () {
+    //   try {
+    //      // requête delete envoyée au backend
+    //     await MessagesService.index({
+    //       // plus besoin de userid car il est extrait du jwt token du backend
+    //       articleId: this.article.id
+    //     }).data
+    //     // if (messages.length) {
+    //     //   // renvoie le bon bookmark
+    //     //   this.message = messages[0]
+    //     // }
+    //     this.$router.push({
+    //       name: 'articles/articleId'
+    //     })
+    //   } catch (err) {
+    //     console.log(err)
+    //   }
+    // },
     async clearMessage () {
       try {
         await MessagesService.delete(this.message.id)

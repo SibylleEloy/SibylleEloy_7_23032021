@@ -58,24 +58,14 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      const userId = req.user.id
+      // const userId = req.user.id
       const {articleId} = req.body
-      // vérifier s'il existe déjà un message
-      // const message = await Message.findOne({
-      //   where: {
-      //     ArticleId: articleId,
-      //     UserId: userId
-      //   }
-      // })
-      // if (message) {
-      //   return res.status(400).send({
-      //     error: 'Vous avez déjà créé un message'
-      //   })
-      // }
+      const {username} = req.body
+      const {comment} = req.body
       const newMessage = await Message.create({
-        // associe le message à un id d'article et un id de user
         ArticleId: articleId,
-        UserId: userId
+        username: username,
+        comment: comment
       })
       res.send(newMessage)
     } catch (err) {

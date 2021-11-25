@@ -20,7 +20,7 @@
         :to="{
           name: 'articles'
         }">
-        Feed
+        Actualités
       </v-btn>
     </v-toolbar-items>
 

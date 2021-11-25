@@ -34,7 +34,6 @@ module.exports = {
   async show (req, res) {
     try {
       const article = await Article.findById(req.params.articleId)
-      console.log('ici on est là', req.params.articleId)
       res.send(article)
     } catch (err) {
       res.status(500).send({

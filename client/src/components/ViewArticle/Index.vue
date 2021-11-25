@@ -13,9 +13,9 @@
           <lien :article="article" />
         </v-flex>
       </v-layout>
-      <v-flex xs12 class="mt-2">
+      <!-- <v-flex xs12 class="mt-2">
         <commentaires :message="message" />
-      </v-flex>
+      </v-flex> -->
    
    </v-container>
 </template>
@@ -38,8 +38,7 @@ export default {
   ],
   data () {
     return {
-      article: {},
-      messages: []
+      article: {}
     }
   },
   computed: {

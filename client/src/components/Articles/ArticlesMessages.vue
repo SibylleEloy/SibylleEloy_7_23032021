@@ -6,7 +6,7 @@
       :items="messages">
       <template slot="items" scope="props">
         <td class="text-xs-right">
-          {{props.item.title}}
+          {{props.item.comment}}
         </td>
          <td class="text-xs-right">
           {{props.item.username}}
