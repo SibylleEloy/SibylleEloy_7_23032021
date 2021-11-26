@@ -33,7 +33,7 @@ qui fetch les articles de la db/backend et le affiche (plutôt que depuis l'Inde
           <br>
           <v-btn
             dark
-            class="black"
+            class="red accent-2"
             :to="{
               name: 'article', 
               params: {

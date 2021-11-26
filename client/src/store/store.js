@@ -21,14 +21,12 @@ export default new Vuex.Store({
   state: {
     token: null,
     user: null,
-    isUserLoggedIn: false,
-    isAuthor: false
+    isUserLoggedIn: false
   },
   mutations: {
     setToken (state, token) {
       state.token = token
       state.isUserLoggedIn = !!(token)
-      state.isAuthor = !!(token)
     },
     setUser (state, user) {
       state.user = user

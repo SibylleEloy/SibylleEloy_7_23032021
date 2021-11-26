@@ -64,7 +64,7 @@
 
       <v-btn
         dark
-        class="black"
+        class="red accent-2"
         @click="create">
         Créer un article
       </v-btn>

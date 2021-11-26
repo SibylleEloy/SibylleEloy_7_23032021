@@ -31,7 +31,7 @@
         <v-btn
           v-if="isUserLoggedIn && !bookmark"
           dark
-          class="black"
+          class="red accent-2"
           @click="setAsBookmark">
           Mettre favori
         </v-btn>
@@ -39,7 +39,7 @@
         <v-btn
           v-if="isUserLoggedIn && bookmark"
           dark
-          class="black"
+          class="red accent-2"
           @click="unsetAsBookmark">
           Supprimer le favori
         </v-btn>
@@ -53,12 +53,13 @@
           </v-btn> -->
 
         <v-btn
-          v-show="isUserLoggedIn && isAuthor"
+          v-if="isUserLoggedIn && isAuthor"
           dark
-          class="black"
+          class="red accent-2"
           @click="deleteArticle">
           Supprimer
         </v-btn>
+        <pre>{{isAuthor}}</pre>
       </v-flex>
 
       <v-flex xs6>
@@ -85,9 +86,9 @@
      <v-btn
           v-if="isUserLoggedIn"
           dark
-          class="black"
+          class="red accent-2"
           @click="sendMessage">
-          Send
+          Envoyer
         </v-btn>
   <!-- Section Affichage des commentaires -->
         <v-data-table
@@ -152,9 +153,11 @@ export default {
   computed: {
     ...mapState([
       'isUserLoggedIn',
-      'user',
-      'isAuthor'
+      'user'
     ]),
+    isAuthor () {
+      return this.article.user_id.toString() === this.user.id.toString()
+    },
     form () {
       return {
         username: this.username,
@@ -225,11 +228,12 @@ export default {
     async sendMessage () {
       try {
         this.message = (await MessagesService.post({
+          user_id: this.user.id,
           username: this.username,
           comment: this.comment,
           articleId: this.article.id
         })).data
-        // this.$router.go()
+        this.$router.go()
       } catch (err) {
         console.log(err)
       }

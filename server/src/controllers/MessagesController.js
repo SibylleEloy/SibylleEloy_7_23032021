@@ -58,11 +58,12 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      // const userId = req.user.id
+      const {user_id} = req.body
       const {articleId} = req.body
       const {username} = req.body
       const {comment} = req.body
       const newMessage = await Message.create({
+        user_id: user_id,
         ArticleId: articleId,
         username: username,
         comment: comment

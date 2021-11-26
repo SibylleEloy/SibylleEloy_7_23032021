@@ -1,6 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define('Message', {
     username: DataTypes.STRING,
+    user_id: DataTypes.STRING,
     comment: DataTypes.TEXT,
     timestamps: true,
     underscored: true,

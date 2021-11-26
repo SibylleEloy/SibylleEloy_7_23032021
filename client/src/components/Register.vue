@@ -47,7 +47,7 @@
         <br>
         <v-btn
           dark
-          class="black"
+          class="red accent-2"
           @click="register">
           S'enregistrer
         </v-btn>

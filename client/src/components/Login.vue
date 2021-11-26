@@ -17,7 +17,7 @@
         <br>
         <v-btn
           dark
-          class="black"
+          class="red accent-2"
           @click="login">
           Se connecter
         </v-btn>

@@ -1,4 +1,5 @@
 const {Article} = require('../models')
+const {Message} = require('../models')
 
 module.exports = {
   async index (req, res) {
@@ -73,6 +74,13 @@ module.exports = {
     try {
       const article = await Article.findById(req.params.articleId)
       await article.destroy()
+      const messages = await Message.findAll({
+        where: {
+          // l'id de l'article est à l'intérieur de la route put
+          ArticleId: req.params.articleId
+        }
+      })
+      await messages.destroy()
       res.send(article)
     } catch (err) {
       res.status(500).send({

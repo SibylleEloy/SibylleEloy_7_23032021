@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar fixed class="black" dark>
+  <v-toolbar fixed class="red accent-1" dark>
       
     <v-toolbar-title class="mr-4">
       <router-link 
@@ -55,6 +55,8 @@
           name: 'profile'
         }"
     >
+    <p class="welcome" v-if="$store.state.isUserLoggedIn">
+     Hello {{ user.username }} ! </p>
       <v-icon>account_circle</v-icon>
     </v-btn>
       
@@ -70,7 +72,15 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
+  computed: {
+    ...mapState([
+      'isUserLoggedIn',
+      'user',
+      'isAuthor'
+    ])
+  },
   methods: {
     logout () {
       this.$store.dispatch('setToken', null)
@@ -86,6 +96,11 @@ export default {
 <style scoped>
 .home {
   cursor: pointer;
+}
+
+.welcome {
+  padding-right: 20px;
+  padding-top: 15px;
 }
 
 /* .home:hover {

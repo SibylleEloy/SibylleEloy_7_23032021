@@ -63,7 +63,7 @@
 
       <v-btn
         dark
-        class="black"
+        class="red accent-2"
         @click="save">
         Enregistrer l'article
       </v-btn>
