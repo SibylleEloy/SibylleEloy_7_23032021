@@ -8,10 +8,11 @@ import Articles from '@/components/Articles/Index'
 import CreateArticle from '@/components/CreateArticle'
 import EditArticle from '@/components/EditArticle'
 import ViewArticle from '@/components/ViewArticle/Index'
+import store from '@/store/store'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -66,3 +67,13 @@ export default new Router({
     }
   ]
 })
+
+// Implementing .beforeEach() hook on router instance:
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'login' && to.name !== 'register' && !store.state.isUserLoggedIn) next({ name: 'Login' })
+  else next()
+  // console.log(store.state.isUserLoggedIn)
+})
+
+// exporting the instance
+export default router

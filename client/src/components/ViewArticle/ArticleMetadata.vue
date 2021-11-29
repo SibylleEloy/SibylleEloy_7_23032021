@@ -33,7 +33,7 @@
           dark
           class="red accent-2"
           @click="setAsBookmark">
-          Mettre favori
+          Mettre en favori
         </v-btn>
 
         <v-btn
@@ -217,7 +217,6 @@ export default {
         // requête delete envoyée au backend
         await ArticlesService.delete(this.article.id)
         this.article = null
-         // dès qu'on est loggé, on est redirigé avec la page articles
         this.$router.push({
           name: 'articles'
         })

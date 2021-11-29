@@ -22,6 +22,16 @@
           Se connecter
         </v-btn>
       </panel>
+      <br>
+      <p>Si vous n'avez pas encore de compte :</p>
+      <v-btn 
+        dark
+        class='red accent-1'
+        :to="{
+          name: 'register'
+        }">
+        Créer un compte
+      </v-btn>
     </v-flex>
   </v-layout>
 </template>

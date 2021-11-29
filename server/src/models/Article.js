@@ -13,7 +13,10 @@ module.exports = (sequelize, DataTypes) => {
   })
 
   Article.associate = function (models) {
-    Article.hasMany(models.Message)
+    Article.hasMany(models.Message, {
+      onDelete: 'cascade',
+      hooks: true
+    })
     //   foreignKey: 'user_id'
     // })
   }
