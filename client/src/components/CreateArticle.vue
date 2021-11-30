@@ -126,6 +126,7 @@ export default {
     async create () {
       const formData = new FormData()
       formData.append('article', JSON.stringify(this.article))
+      formData.append('user_id', this.$store.state.user.id)
       formData.append('file', this.file, this.file.name)
       console.log(this.file)
       console.log(this.article)

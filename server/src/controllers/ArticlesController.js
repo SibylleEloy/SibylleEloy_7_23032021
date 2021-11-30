@@ -22,7 +22,7 @@ module.exports = {
         })
       } else {
         articles = await Article.findAll({
-          limit: 10
+          limit: 20
         })
       }
       res.send(articles)
@@ -48,6 +48,7 @@ module.exports = {
       const articleData = JSON.parse(req.body.article)
       const article = await Article.create({
         ...articleData,
+        user_id: req.body.user_id,
         file: `${req.protocol}://${req.get('host')}/images/${
           req.file.filename}`
       })
