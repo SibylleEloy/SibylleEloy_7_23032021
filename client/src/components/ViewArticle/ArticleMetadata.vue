@@ -59,7 +59,6 @@
           @click="deleteArticle">
           Supprimer
         </v-btn>
-        <pre>{{isAuthor}}</pre>
       </v-flex>
 
       <v-flex xs6>

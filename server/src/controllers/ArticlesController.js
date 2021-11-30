@@ -44,7 +44,13 @@ module.exports = {
   },
   async post (req, res) {
     try {
-      const article = await Article.create(req.body)
+      console.log(req.body.article)
+      const articleData = JSON.parse(req.body.article)
+      const article = await Article.create({
+        ...articleData,
+        file: `${req.protocol}://${req.get('host')}/images/${
+          req.file.filename}`
+      })
       res.send(article)
     } catch (err) {
       res.status(500).send({

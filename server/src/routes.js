@@ -11,6 +11,9 @@ const isAuthenticated = require('./policies/isAuthenticated')
 const isAdmin = require('./policies/isAdmin')
 // déclaration des routes qui pointent vers le controller / endpoints
 // appel de la policy comme middleware function avant le controller
+const multer = require("./multer-config");
+// fichier dans lequel multer stock tous les fichiers entrants
+// const upload = multer({dest: '/images'})
 
 module.exports = (app) => {
   app.post('/register',
@@ -34,6 +37,7 @@ module.exports = (app) => {
     ArticlesController.put)
   app.post('/articles',
     isAuthenticated,
+    multer,
     ArticlesController.post)
   app.delete('/articles/:articleId',
     isAuthenticated,

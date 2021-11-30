@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     source: DataTypes.STRING,
     sourceImageUrl: DataTypes.STRING,
     lien: DataTypes.STRING,
-    texte: DataTypes.TEXT
+    texte: DataTypes.TEXT,
+    file: DataTypes.TEXT
     // identifiant: DataTypes.TEXT
     // tab: DataTypes.TEXT
   })

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
+// import Home from '@/components/Home'
 import Register from '@/components/Register'
 import Login from '@/components/Login'
 import Profile from '@/components/Profile'
@@ -51,14 +51,9 @@ const router = new Router({
       component: EditArticle
     },
     {
-      path: '/articles/:articleId/delete',
-      name: 'article-edit',
-      component: EditArticle
-    },
-    {
       path: '/',
-      name: 'home',
-      component: Home
+      name: 'login',
+      component: Login
     },
     {
       // page par défaut
