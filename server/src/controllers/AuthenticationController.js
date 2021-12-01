@@ -2,6 +2,8 @@
 const {User} = require('../models')
 const jwt = require('jsonwebtoken')
 const config = require('../config/config')
+// importation de crypto-js pour chiffrer l'email
+const cryptojs = require('crypto-js')
 
 // helper method/fonction qui sign un objet user en utilisant la librairie jwt pour nous renvoyer un jwt token
 function jwtSignUser (user) {
@@ -14,8 +16,16 @@ function jwtSignUser (user) {
 module.exports = {
   async register (req, res) {
     try {
+      // chiffrer l'email avant de l'envoyer dans la db
+      const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, 'CLE_SECRETE').toString()
+      console.log('--->CONTENU: emailCryptoJs')
+      console.log(emailCryptoJs)
       // on créé un user
-      const user = await User.create(req.body)
+      const user = await User.create({
+        password: req.body.password,
+        email: emailCryptoJs
+      })
+      // const user = await User.create(req.body)
       // on renvoie un jwt token après qu'un user s'enregistre
       const userJson = user.toJSON()
       res.send({

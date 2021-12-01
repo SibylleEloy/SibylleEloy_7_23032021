@@ -45,12 +45,12 @@ module.exports = {
   async post (req, res) {
     try {
       console.log(req.body.article)
+      console.log(req.file.filename)
       const articleData = JSON.parse(req.body.article)
       const article = await Article.create({
         ...articleData,
         user_id: req.body.user_id,
-        file: `${req.protocol}://${req.get('host')}/images/${
-          req.file.filename}`
+        file: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
       })
       res.send(article)
     } catch (err) {

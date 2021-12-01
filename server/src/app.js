@@ -16,7 +16,8 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(helmet())
 // Définition du chemin pour enregistrement des photos sur le backend
-app.use('/images', express.static(path.join(__dirname, 'images')))
+// app.use('/images', express.static(path.join(__dirname, 'images')))
+app.use('/images', express.static('images'));
 // const upload = multer({
 //   dest: "./uploads"
 // })

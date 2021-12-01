@@ -62,7 +62,7 @@
       </v-flex>
 
       <v-flex xs6>
-        <img class="source-image" :src="article.sourceImageUrl" />
+        <img class="source-image" :src="article.file" />
       </v-flex>
     </v-layout>
   </panel>
