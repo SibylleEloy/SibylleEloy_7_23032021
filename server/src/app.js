@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+// middleware qui log des requêtes HTTP
 const morgan = require('morgan')
 const path = require('path')
 // Helmet aide à protéger votre application de certaines des vulnérabilités bien connues du Web en configurant de manière appropriée des en-têtes HTTP
@@ -24,6 +25,10 @@ app.use('/images', express.static('images'));
 // app.use("/upload", upload.single("file"), (req, res) => {
 //   res.json({ file: req.file })
 // })
+
+// importation du package pour utiliser les variables d'environnement
+const dotenv = require('dotenv')
+const result = dotenv.config()
 
 // librairie passport
 require('./passport')

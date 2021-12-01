@@ -5,6 +5,10 @@ const config = require('../config/config')
 // importation de crypto-js pour chiffrer l'email
 const cryptojs = require('crypto-js')
 
+// importation pour utilisation des variables d'environnement
+// const dotenv = require('dotenv')
+// const result = dotenv.config()
+
 // helper method/fonction qui sign un objet user en utilisant la librairie jwt pour nous renvoyer un jwt token
 function jwtSignUser (user) {
   const ONE_WEEK = 60 * 60 * 24 * 7
@@ -17,7 +21,7 @@ module.exports = {
   async register (req, res) {
     try {
       // chiffrer l'email avant de l'envoyer dans la db
-      const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, 'CLE_SECRETE').toString()
+      const emailCryptoJs = cryptojs.HmacSHA256(req.body.email, `${process.env.CRYPTOJS_EMAIL}`).toString()
       console.log('--->CONTENU: emailCryptoJs')
       console.log(emailCryptoJs)
       // on créé un user
@@ -40,14 +44,32 @@ module.exports = {
   },
   async login (req, res) {
     try {
-    // on récupère un email du body
+      // console.log(req.body.email)
+      // console.log(req.body.password)
+      // chiffrer l'email de la requête
       const {email, password} = req.body
+      const emailCryptoJs = cryptojs.HmacSHA256(email, `${process.env.CRYPTOJS_EMAIL}`).toString()
+      console.log('--->CONTENU: emailCryptoJs')
+      console.log(emailCryptoJs)
+
+      // on récupère un email du body
+      // const {email, password} = req.body
       // on cherche un user qui corresponde
       const user = await User.findOne({
         where: {
-          email: email
+          email: emailCryptoJs
         }
       })
+      console.log(user)
+      console.log(user.email)
+      // on récupère un email du body
+      // const {password} = req.body.password
+      // on cherche un user qui corresponde
+      // const user = await User.findOne({
+      //   where: {
+      //     email: email
+      //   }
+      // })
       // si le user n'existe pas
       if (!user) {
         return res.status(403).send({
