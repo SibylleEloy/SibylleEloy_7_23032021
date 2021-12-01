@@ -27,7 +27,11 @@ module.exports = {
       // on créé un user
       const user = await User.create({
         password: req.body.password,
-        email: emailCryptoJs
+        email: emailCryptoJs,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
+        role: req.body.role
       })
       // const user = await User.create(req.body)
       // on renvoie un jwt token après qu'un user s'enregistre
@@ -99,7 +103,14 @@ module.exports = {
   },
   async profile (req, res) {
     try {
-      const user = await User.findById(req.params.userId)
+      // console.log(req.body)
+      const userid = req.params.userId
+      // const user = await User.findById(req.params.userId)
+      const user = await User.findOne({
+        where: {
+          id: userid
+        }
+      })
       res.send(user)
     } catch (err) {
       res.status(500).send({
