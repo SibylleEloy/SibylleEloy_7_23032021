@@ -2,17 +2,20 @@
   {
     "ArticleId": 1,
     "comment": "Incorrect",
-    "username": "Pierre"
+    "username": "Pierre",
+    "user_id": "1"
   },
    {
     "ArticleId": 1,
     "comment": "Intéressant pour le prochain séminaire",
-    "username": "Sibylle"
+    "username": "Sibylle",
+    "user_id": "2"
   },
     {
     "ArticleId": 2,
     "comment": "Pour l'équipe commerciale",
-    "username": "Sibylle"
+    "username": "Sibylle",
+    "user_id": "2"
   }
 ]
   

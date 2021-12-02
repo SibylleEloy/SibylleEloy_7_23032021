@@ -80,11 +80,12 @@ module.exports = {
   async remove (req, res) {
     try {
       const userId = req.user.id
-      const {messageId} = req.params
+      console.log(userId)
+      // const {messageId} = req.params
       const message = await Message.findOne({
         where: {
-          id: messageId,
-          UserId: userId
+          // id: messageId,
+          User_id: userId
         }
       })
       if (!message) {

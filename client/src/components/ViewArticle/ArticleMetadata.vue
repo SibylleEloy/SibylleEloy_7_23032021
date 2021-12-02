@@ -101,10 +101,23 @@
             <td class="text-xs-right">
               {{props.item.username}}
             </td>
-            <!-- <ul>
-              <li v-for="message in messages" v-bind:key="messages.username">{{ message.title }}</li>
-              <li v-for="message in messages">{{ message.username }}</li>
-            </ul> -->
+             <td class="text-xs-right">
+              {{props.item.user_id}}
+            </td>
+            <td>
+              <v-btn
+              v-if="isUserLoggedIn"
+              transparent
+              class="btn-clear-message"
+              @click="clearMessage"
+              >
+                <v-icon dark>close</v-icon>
+              </v-btn>
+            </td>
+             <!-- <td class="text-xs-right"> -->
+            <!-- <v-button  
+               <v-icon class="text-xs-right">close-circle-outline</v-icon>  -->
+            <!-- </td> -->
           </template>
         </v-data-table>
     <!-- <textarea
@@ -131,6 +144,7 @@ export default {
       bookmark: null,
       comment: '',
       username: '',
+      user_id: '',
       message: null,
       messages: [],
       headers: [
@@ -156,6 +170,9 @@ export default {
     ]),
     isAuthor () {
       return this.article.user_id.toString() === this.user.id.toString()
+    },
+    isAuthorOfMessage () {
+      return this.message.user_id === this.user.id
     },
     form () {
       return {
@@ -256,8 +273,11 @@ export default {
     // },
     async clearMessage () {
       try {
-        await MessagesService.delete(this.message.id)
+        await MessagesService.delete({
+          user_id: this.user.id
+        })
         this.message = null
+        this.$router.go()
       } catch (err) {
         console.log(err)
       }
@@ -306,5 +326,13 @@ export default {
 .source-image {
   width: 70%;
   margin: 0 auto;
+}
+
+.btn-clear-message {
+  padding: 0;
+}
+
+.btn-clear-message {
+  min-width: 0;
 }
 </style>
