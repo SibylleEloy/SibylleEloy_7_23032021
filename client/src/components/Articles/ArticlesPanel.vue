@@ -45,7 +45,7 @@ qui fetch les articles de la db/backend et le affiche (plutôt que depuis l'Inde
         </v-flex>
 
         <v-flex xs6>
-          <img class="source-image" :src="article.sourceImageUrl" />
+          <img class="source-image" :src="article.file" />
           <br>
           {{ article.source }}
         </v-flex>
