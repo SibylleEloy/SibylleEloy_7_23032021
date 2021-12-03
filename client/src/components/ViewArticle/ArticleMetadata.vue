@@ -53,7 +53,7 @@
           </v-btn> -->
 
         <v-btn
-          v-if="isUserLoggedIn && isAuthor"
+          v-if="isAdminOrAuthor"
           dark
           class="red accent-2"
           @click="deleteArticle">
@@ -106,7 +106,7 @@
             </td> -->
             <td>
               <v-btn
-              v-if="isUserLoggedIn"
+              v-if="isAdminOrAuthor(props.item.user_id)"
               transparent
               class="btn-clear-message"
               @click="clearMessage"
@@ -171,10 +171,10 @@ export default {
     isAuthor () {
       return this.article.user_id.toString() === this.user.id.toString()
     },
-    // isAdmin () {
-    //   console.log(this.user.role)
-    //   return this.user.role === 'Administrateur'
-    // },
+    isAdmin () {
+      console.log(this.user.role)
+      return this.user.role === 'Administrateur'
+    },
     form () {
       return {
         username: this.username,
@@ -208,13 +208,13 @@ export default {
     }
   },
   methods: {
-    // isAdminOrAuthor (userId) {
-    //   if (typeof userId === 'undefined') {
-    //     return this.isUserLoggedIn && (this.isAuthor || this.isAdmin)
-    //   } else {
-    //     return (userId === this.user.id) || this.isAdmin
-    //   }
-    // },
+    isAdminOrAuthor (userId) {
+      if (typeof userId === 'undefined') {
+        return this.isUserLoggedIn && (this.isAuthor || this.isAdmin)
+      } else {
+        return (userId === this.user.id) || this.isAdmin
+      }
+    },
     async setAsBookmark () {
       try {
         this.bookmark = (await BookmarksService.post({
@@ -234,7 +234,7 @@ export default {
       }
     },
     async deleteArticle () {
-      if (!this.isAuthor) {
+      if (!this.isAdminOrAuthor) {
         return
       }
       try {

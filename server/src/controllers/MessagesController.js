@@ -93,7 +93,9 @@ module.exports = {
           error: 'Vous avez pas accès à ce message'
         })
       }
-      await message.destroy()
+      if ((message.user_id === userId) || (req.user.role === 'Administrateur')) {
+        await message.destroy()
+      }
       res.send(message)
     } catch (err) {
       res.status(500).send({
