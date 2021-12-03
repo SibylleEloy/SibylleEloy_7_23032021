@@ -8,7 +8,7 @@ const MessagesController = require('./controllers/MessagesController')
 // authentification des routes sensibles
 const isAuthenticated = require('./policies/isAuthenticated')
 // autorisation des routes sensibles
-const isAdmin = require('./policies/isAdmin')
+// const isAdmin = require('./policies/isAdmin')
 // déclaration des routes qui pointent vers le controller / endpoints
 // appel de la policy comme middleware function avant le controller
 const multer = require("./multer-config");
@@ -41,7 +41,6 @@ module.exports = (app) => {
     ArticlesController.post)
   app.delete('/articles/:articleId',
     isAuthenticated,
-    isAdmin,
     ArticlesController.remove)
 
   // pour bookmarks et histories, on utilise un endpoint authentification : le user doit être connecté, il doit y avoir ce jwt token qui doit être valide et connecté au bon utilisateur
