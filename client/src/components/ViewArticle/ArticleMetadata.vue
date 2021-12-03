@@ -100,10 +100,10 @@
             </td>
             <td class="text-xs-right">
               {{props.item.username}}
-            </td>
+            <!-- </td>
              <td class="text-xs-right">
               {{props.item.user_id}}
-            </td>
+            </td> -->
             <td>
               <v-btn
               v-if="isUserLoggedIn"
@@ -171,9 +171,10 @@ export default {
     isAuthor () {
       return this.article.user_id.toString() === this.user.id.toString()
     },
-    isAuthorOfMessage () {
-      return this.message.user_id === this.user.id
-    },
+    // isAdmin () {
+    //   console.log(this.user.role)
+    //   return this.user.role === 'Administrateur'
+    // },
     form () {
       return {
         username: this.username,
@@ -207,6 +208,13 @@ export default {
     }
   },
   methods: {
+    // isAdminOrAuthor (userId) {
+    //   if (typeof userId === 'undefined') {
+    //     return this.isUserLoggedIn && (this.isAuthor || this.isAdmin)
+    //   } else {
+    //     return (userId === this.user.id) || this.isAdmin
+    //   }
+    // },
     async setAsBookmark () {
       try {
         this.bookmark = (await BookmarksService.post({
@@ -273,6 +281,7 @@ export default {
     // },
     async clearMessage () {
       try {
+        // console.log(messageId)
         await MessagesService.delete({
           user_id: this.user.id
         })
@@ -336,3 +345,4 @@ export default {
   min-width: 0;
 }
 </style>
+

@@ -79,12 +79,12 @@ module.exports = {
   // on ajoute ici de la sécurité au controlleur : au lieu d'utiliser findById on vérifie que ce soit le bon userid avec l'authentification contre le jwt token et non le user id de la querystring
   async remove (req, res) {
     try {
+      // utilisateur connecté sur la page
       const userId = req.user.id
-      console.log(userId)
-      // const {messageId} = req.params
+      // const {messageId} = req.body.messageId
       const message = await Message.findOne({
         where: {
-          // id: messageId,
+          // id: messageId
           User_id: userId
         }
       })
