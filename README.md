@@ -1,16 +1,21 @@
-# Groupomania
-A Vue.js / Express.js web application for sharing articles
+## Projet : Créer un réseau social d’entreprise
 
-# Setup
+*Le projet consiste à construire un réseau social interne pour les employés de Groupomania. Le but de cet outil est de faciliter les interactions entre collègues.*
 
-### Client
+🌐 🌏 📟 📰 🗣️
+
+#### Une application Vue.js / Express.js de partage d'articles
+
+#### Setup
+
+##### Client
 ```
 cd client
 npm install
 npm start
 ```
 
-### Server
+##### Server
 ```
 cd server
 npm install
